@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 10:54:24 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/12/10 10:54:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/12/12 12:33:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@
 
 # define X 0
 # define Y 1
+
+# include <time.h>
+typedef	struct	s_motion	t_motion;
+
+struct			s_motion
+{
+	double		px;
+	double		py;
+	double		vx;
+	double		vy;
+	t_motion	*next;
+};
+
+# define INCR_WALKER 0.0010
+# define FRICTION 1.015
+# define SIZE 50.0
+
+
 
 typedef	struct s_polygone	t_polygone;
 
@@ -251,6 +269,11 @@ struct			s_env
 	t_polygone	*transform;
 	t_polygone	*beg_actif;
 	t_polygone	*actif;
+
+	int			moving;
+	t_polygone	*result_trans_model;
+	t_motion	*trans_motion;
+
 	int			draw_base;
 	int			draw_transform;
 	int			add_iter;
@@ -647,8 +670,21 @@ void			init_fractol(int id);
 /*
 **	init_param_koch
 */
+
 int				init_statment(t_env *e);
 void			sliders_set_valu(t_slider *slide, double v1, double v2);
 t_polygone		*init_segment(double valu[4][2], int nb, t_border *boder
 				, double min);
+
+/*
+**	moovment
+*/
+
+t_motion	*motion_new();
+t_motion	*motion_new_from_polygone(t_polygone *begin);
+int			motion_free(t_motion **begin);
+void		motion_walker(t_motion *obj, double friction, double increm);
+void		actu_motion(t_win *w, t_motion *motion, t_polygone *trans, t_polygone *result);
+t_polygone		*copy_segment_neutre(t_polygone *src);
+
 #endif

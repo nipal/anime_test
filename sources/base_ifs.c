@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 05:01:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/12/10 11:55:30 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/12/12 12:33:12 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,19 @@ int						actu_base(t_env *e, t_polygone *src)
 
 int						actu_transform(t_env *e, t_polygone *src)
 {
-	polygone_destroy(&(e->transform));
-	e->transform = transform(src);
-	print_fractal(e);
+	if (e->moving)
+	{
+		polygone_destroy(&(e->result_trans_model));
+		e->result_trans_model = copy_segment_neutre(src);
+		motion_free(&(e->trans_motion));
+		e->trans_motion = motion_new_from_polygone(src); 
+	}
+	else
+	{
+		polygone_destroy(&(e->transform));
+		e->transform = transform(src);
+		print_fractal(e);
+	}
 	return (1);
 }
 

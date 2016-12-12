@@ -6,7 +6,7 @@
 #    By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by fjanoty           #+#    #+#              #
-#    Updated: 2016/12/12 02:40:01 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/12/12 12:06:41 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC		= 	main.c \
 			actu_polygone.c \
 			mini_parseur.c \
 			init_param_koch.c \
+			moovment.c \
 			exit.c 
 
 OBJ		= $(SRC:.c=.o)

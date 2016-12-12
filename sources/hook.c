@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 01:26:10 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/12/10 08:15:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/12/12 12:09:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int			main_work(t_env *e)
 	draw_the_sliders(e->param, e->sliders);
 	(e->add_point && e->base_add && e->trans_add) ? draw_prewiew(e->param)
 		: (void)e;
+	if (e->moving)
+	{
+		actu_motion(e->param, e->trans_motion, e->trans_model, e->result_trans_model);
+	}
 	actu_win_rest(e->param);
 	return (1);
 }
